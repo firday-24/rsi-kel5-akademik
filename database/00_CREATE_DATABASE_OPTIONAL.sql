@@ -1,0 +1,3 @@
+-- Jalankan sekali dari Db2 Command Line Processor / terminal VM jika database belum ada.
+-- Contoh: db2 create database PORTALDB using codeset UTF-8 territory ID
+-- Setelah database dibuat, buat koneksi baru di DBeaver ke PORTALDB.

@@ -1,0 +1,28 @@
+<?php
+declare(strict_types=1);
+class presensi_m {
+    public function getDataRekap(string $nim): array {
+        $sql = "SELECT KP.ID_PENGAMBILAN, MK.ID_MATKUL, MK.NAMA_MATKUL, JK.KELAS, JK.SEMESTER, JK.TAHUN_AKADEMIK,
+                COUNT(P.ID_PRESENSI) AS TOTAL_PERTEMUAN,
+                SUM(CASE WHEN P.STATUS_PRESENSI='HADIR' THEN 1 ELSE 0 END) AS HADIR,
+                SUM(CASE WHEN P.STATUS_PRESENSI='IZIN' THEN 1 ELSE 0 END) AS IZIN,
+                SUM(CASE WHEN P.STATUS_PRESENSI='SAKIT' THEN 1 ELSE 0 END) AS SAKIT,
+                SUM(CASE WHEN P.STATUS_PRESENSI='ALPHA' THEN 1 ELSE 0 END) AS ALPHA
+                FROM KRS_DETAIL KP JOIN KRS K ON K.ID_KRS=KP.ID_KRS
+                JOIN JADWAL_KULIAH JK ON JK.ID_JADWAL=KP.ID_JADWAL
+                JOIN MATA_KULIAH MK ON MK.ID_MATKUL=JK.ID_MATKUL
+                LEFT JOIN PRESENSI P ON P.ID_PENGAMBILAN=KP.ID_PENGAMBILAN
+                WHERE K.NIM=? GROUP BY KP.ID_PENGAMBILAN, MK.ID_MATKUL, MK.NAMA_MATKUL, JK.KELAS, JK.SEMESTER, JK.TAHUN_AKADEMIK
+                ORDER BY JK.TAHUN_AKADEMIK DESC, JK.SEMESTER DESC, MK.NAMA_MATKUL";
+        $s=db()->prepare($sql); $s->execute([$nim]); $rows=$s->fetchAll();
+        foreach($rows as &$r){$total=(int)$r['TOTAL_PERTEMUAN'];$r['PERSENTASE']=$total?round(((int)$r['HADIR']/$total)*100,1):0;} return $rows;
+    }
+    public function getLogPresensi(string $nim): array {
+        $sql="SELECT MK.NAMA_MATKUL, JK.KELAS, SP.PERTEMUAN_KE, SP.TANGGAL, P.STATUS_PRESENSI, P.WAKTU_PRESENSI
+        FROM PRESENSI P JOIN KRS_DETAIL KD ON KD.ID_PENGAMBILAN=P.ID_PENGAMBILAN
+        JOIN KRS K ON K.ID_KRS=KD.ID_KRS JOIN JADWAL_KULIAH JK ON JK.ID_JADWAL=KD.ID_JADWAL
+        JOIN MATA_KULIAH MK ON MK.ID_MATKUL=JK.ID_MATKUL JOIN SESI_PRESENSI SP ON SP.ID_SESI=P.ID_SESI
+        WHERE K.NIM=? ORDER BY SP.TANGGAL DESC, SP.PERTEMUAN_KE DESC";
+        $s=db()->prepare($sql);$s->execute([$nim]);return $s->fetchAll();
+    }
+}

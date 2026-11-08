@@ -1,0 +1,7 @@
+.env
+/public/uploads/*
+!/public/uploads/.htaccess
+!/public/uploads/demo_IZ001.pdf
+!/public/uploads/demo_IZ002.pdf
+!/public/uploads/demo_IZ003.pdf
+!/public/uploads/demo_IZ004.pdf
