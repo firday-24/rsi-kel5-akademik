@@ -20,6 +20,7 @@ try{
  elseif($method==='POST'&&$path==='/login')(new Login())->ProsesLogin();
  elseif($method==='POST'&&$path==='/logout')(new Login())->Logout();
  elseif($method==='GET'&&$path==='/mahasiswa')(new BerandaMahasiswa())->tampil();
+ elseif ($method === 'GET' && $path === '/mahasiswa/khs') (new KHS())->lihatKhs((int)($_GET['semester'] ?? 3));
  elseif($method==='GET'&&$path==='/mahasiswa/presensi')(new presensi())->getLogPresensi();
  elseif($method==='GET'&&$path==='/mahasiswa/izin')(new izin())->getRiwayatPengajuan();
  elseif($method==='GET'&&$path==='/mahasiswa/izin/buat')(new izin())->getFormPengajuan();
