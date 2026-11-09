@@ -24,13 +24,12 @@ class KHS
         $dataKhs = $model->lihatDataKhs($semester);
 
         // Jika tidak ada data, tampilkan pesan.
-        if (count($dataKhs) === 0) {
-            $this->tampilkanPesan($semester);
-            return;
-        }
-
-        // Jika ada data, tampilkan tabel KHS.
-        $this->tampilkan($dataKhs, $semester);
+      if (count($dataKhs) === 0) {
+    $this->tampilkanPesan($semester);
+    return;
+}
+// jika ada data
+$this->tampilkan($dataKhs, $semester);
     }
 
     /**
