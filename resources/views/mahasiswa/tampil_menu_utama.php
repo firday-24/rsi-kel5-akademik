@@ -69,7 +69,7 @@ $ipk = '3,78'; $sksSemester = 24; $sksLulus = 48; $sksMaks = 144;
                 <span class="quick-copy"><strong>Pengajuan Izin</strong><small>Ajukan izin perkuliahan</small></span>
                 <span class="quick-arrow">↗</span>
             </a>
-            <a class="quick-card" href="#">
+            <a class="quick-card" href="<?= e(url('mahasiswa/khs')) ?>">
                 <span class="quick-icon"><svg viewBox="0 0 48 48"><path d="m5 30 12-14 8 8L43 5M10 40V31M20 40V27M30 40V22M40 40V13"/></svg></span>
                 <span class="quick-copy"><strong>KHS</strong><small>Lihat hasil studimu</small></span>
                 <span class="quick-arrow">↗</span>
