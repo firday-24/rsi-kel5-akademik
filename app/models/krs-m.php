@@ -2,16 +2,26 @@
 
 declare(strict_types=1);
 
-class KrsModel
+class KRS_modal
 {
+    public string $dosen = '';
+    public string $hari = '';
+    private int $idKrs = 0;
+    public string $jam = '';
+    public string $kelas = '';
+    public int $kuota = 0;
+    public string $mataKuliah = '';
+    public string $programStudi = '';
+    public string $ruang = '';
+
     private function initDummy(): void
     {
         if (!isset($_SESSION['krs_jadwal'])) {
             $_SESSION['krs_jadwal'] = [
                 [
-                    'id' => 'KRS001',
-                    'matkul' => 'Pemrograman Dasar',
-                    'prodi' => 'PTI',
+                    'idKrs' => 1,
+                    'mataKuliah' => 'Pemrograman Dasar',
+                    'programStudi' => 'PTI',
                     'sks' => '3 SKS',
                     'kelas' => 'A',
                     'dosen' => 'Agus Wicaksono',
@@ -21,9 +31,9 @@ class KrsModel
                     'kuota' => 40
                 ],
                 [
-                    'id' => 'KRS002',
-                    'matkul' => 'Desain Basis Data',
-                    'prodi' => 'SI',
+                    'idKrs' => 2,
+                    'mataKuliah' => 'Desain Basis Data',
+                    'programStudi' => 'SI',
                     'sks' => '2 SKS',
                     'kelas' => 'B',
                     'dosen' => 'Welly Purnomo, S.T., M.Kom',
@@ -33,9 +43,9 @@ class KrsModel
                     'kuota' => 40
                 ],
                 [
-                    'id' => 'KRS003',
-                    'matkul' => 'Agama Islam',
-                    'prodi' => 'TI',
+                    'idKrs' => 3,
+                    'mataKuliah' => 'Agama Islam',
+                    'programStudi' => 'TI',
                     'sks' => '2 SKS',
                     'kelas' => 'C',
                     'dosen' => 'Welly Purnomo, S.T., M.Kom',
@@ -45,9 +55,9 @@ class KrsModel
                     'kuota' => 40
                 ],
                 [
-                    'id' => 'KRS004',
-                    'matkul' => 'Probabilitas dan Statistika',
-                    'prodi' => 'TI',
+                    'idKrs' => 4,
+                    'mataKuliah' => 'Probabilitas dan Statistika',
+                    'programStudi' => 'TI',
                     'sks' => '3 SKS',
                     'kelas' => 'D',
                     'dosen' => 'Uun Hariyanti, S.Pd., M.Pd., Ph.D',
@@ -57,9 +67,9 @@ class KrsModel
                     'kuota' => 40
                 ],
                 [
-                    'id' => 'KRS005',
-                    'matkul' => 'Matematika Diskret',
-                    'prodi' => 'SI',
+                    'idKrs' => 5,
+                    'mataKuliah' => 'Matematika Diskret',
+                    'programStudi' => 'SI',
                     'sks' => '2 SKS',
                     'kelas' => 'D',
                     'dosen' => 'Ir. Wibisono Sukmo Wardhono, S.T., M.T.',
@@ -69,9 +79,9 @@ class KrsModel
                     'kuota' => 40
                 ],
                 [
-                    'id' => 'KRS006',
-                    'matkul' => 'Manajemen Bisnis',
-                    'prodi' => 'SI',
+                    'idKrs' => 6,
+                    'mataKuliah' => 'Manajemen Bisnis',
+                    'programStudi' => 'SI',
                     'sks' => '2 SKS',
                     'kelas' => 'A',
                     'dosen' => 'Welly Purnomo, S.T., M.Kom',
@@ -84,9 +94,28 @@ class KrsModel
         }
     }
 
-    public function getAll(): array
+    public function getAllDataKrs(): array
     {
         $this->initDummy();
         return $_SESSION['krs_jadwal'];
+    }
+
+    public function tambahDataKrs(array $dataKrs): void
+    {
+        $this->initDummy();
+        $nextId = count($_SESSION['krs_jadwal']) + 1;
+
+        $_SESSION['krs_jadwal'][] = [
+            'idKrs' => $nextId,
+            'mataKuliah' => $dataKrs['mataKuliah'],
+            'programStudi' => $dataKrs['programStudi'],
+            'sks' => '2 SKS',
+            'kelas' => $dataKrs['kelas'],
+            'dosen' => $dataKrs['dosen'],
+            'hari' => $dataKrs['hari'],
+            'jam' => $dataKrs['jam'],
+            'ruang' => $dataKrs['ruang'],
+            'kuota' => (int)$dataKrs['kuota']
+        ];
     }
 }
