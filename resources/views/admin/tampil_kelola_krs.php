@@ -317,9 +317,9 @@
                 <h1>Kelola KRS</h1>
                 <p>Kelola jadwal, ruang, dan informasi perkuliahan.</p>
             </div>
-            <button class="btn-tambah" onclick="alert('Fitur Tambah Jadwal siap dihubungkan!')">
+            <a href="/demo/public/admin/krs/tambah" class="btn-tambah">
                 <span>⊕</span> Tambah Jadwal
-            </button>
+            </a>
         </div>
 
         <div class="table-card">
@@ -348,9 +348,9 @@
                     <tbody>
                         <?php foreach ($daftar_krs as $krs): ?>
                             <tr>
-                                <td><strong><?= htmlspecialchars($krs['matkul']) ?></strong></td>
+                                <td><strong><?= htmlspecialchars($krs['mataKuliah']) ?></strong></td>
                                 <td>
-                                    <span class="prodi-name"><?= htmlspecialchars($krs['prodi']) ?></span>
+                                    <span class="prodi-name"><?= htmlspecialchars($krs['programStudi']) ?></span>
                                     <span class="sks-text"><?= htmlspecialchars($krs['sks']) ?></span>
                                 </td>
                                 <td><?= htmlspecialchars($krs['kelas']) ?></td>
@@ -361,8 +361,8 @@
                                 <td><?= htmlspecialchars((string)$krs['kuota']) ?></td>
                                 <td>
                                     <div class="aksi-group">
-                                        <button class="btn-edit" onclick="alert('Edit: <?= htmlspecialchars($krs['matkul']) ?>')">✏️ Edit</button>
-                                        <button class="btn-delete" onclick="alert('Hapus: <?= htmlspecialchars($krs['matkul']) ?>')">🗑️ Delete</button>
+                                        <button class="btn-edit" onclick="alert('Edit: <?= htmlspecialchars($krs['mataKuliah']) ?>')">✏️ Edit</button>
+                                        <button class="btn-delete" onclick="alert('Hapus: <?= htmlspecialchars($krs['mataKuliah']) ?>')">🗑️ Delete</button>
                                     </div>
                                 </td>
                             </tr>
