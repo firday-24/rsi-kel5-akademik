@@ -291,6 +291,89 @@
             color: #2563EB;
             font-weight: 500;
         }
+
+        /* Modal Konfirmasi Hapus */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #FFFFFF;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #64748B;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .modal-desc {
+            font-size: 13px;
+            color: #64748B;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-batal {
+            background: #E57385;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-batal:hover {
+            background: #D85B6F;
+        }
+
+        .btn-setuju {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-setuju:hover {
+            background: #1D4ED8;
+        }
     </style>
 </head>
 
@@ -362,7 +445,7 @@
                                 <td>
                                     <div class="aksi-group">
                                         <a href="/demo/public/admin/krs/edit/<?= $krs['idKrs'] ?>" class="btn-edit">✏️ Edit</a>
-                                        <button class="btn-delete" onclick="alert('Hapus: <?= htmlspecialchars($krs['mataKuliah']) ?>')">🗑️ Delete</button>
+                                        <button type="button" class="btn-delete" onclick="bukaModalHapus(<?= $krs['idKrs'] ?>)">🗑️ Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -390,6 +473,39 @@
                 const text = row.innerText.toLowerCase();
                 row.style.display = text.includes(input) ? "" : "none";
             });
+        }
+    </script>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div id="modalHapus" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" class="modal-close" onclick="tutupModalHapus()">✕</button>
+            <h3 class="modal-title">Apakah Anda yakin ingin menghapus data ini ?</h3>
+            <p class="modal-desc">Konfirmasi terlebih dahulu sebelum melakukan tindakan</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-batal" onclick="tutupModalHapus()">Tidak</button>
+                <form id="formHapus" method="POST" action="">
+                    <?php if (function_exists('csrf_field')): ?>
+                        <?= csrf_field() ?>
+                    <?php else: ?>
+                        <input type="hidden" name="_csrf" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                        <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                    <?php endif; ?>
+                    <button type="submit" class="btn-setuju">Ya, Setujui</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function bukaModalHapus(idKrs) {
+            document.getElementById('formHapus').action = '/demo/public/admin/krs/hapus/' + idKrs;
+            document.getElementById('modalHapus').classList.add('active');
+        }
+
+        function tutupModalHapus() {
+            document.getElementById('modalHapus').classList.remove('active');
         }
     </script>
 </body>
