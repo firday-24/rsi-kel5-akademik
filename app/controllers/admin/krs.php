@@ -104,4 +104,14 @@ class KRS
         // Kembali ke halaman Kelola KRS setelah submit
         redirect('admin/krs');
     }
+
+    public function hapusKrs(int $idKrs): void
+    {
+        AuthMiddleware::role('ADMIN');
+
+        (new KRS_modal())->hapusDataKrs($idKrs);
+
+        // Kembali ke halaman Kelola KRS setelah data dihapus
+        redirect('admin/krs');
+    }
 }
