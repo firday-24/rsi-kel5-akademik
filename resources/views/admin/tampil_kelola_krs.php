@@ -361,7 +361,7 @@
                                 <td><?= htmlspecialchars((string)$krs['kuota']) ?></td>
                                 <td>
                                     <div class="aksi-group">
-                                        <button class="btn-edit" onclick="alert('Edit: <?= htmlspecialchars($krs['mataKuliah']) ?>')">✏️ Edit</button>
+                                        <a href="/demo/public/admin/krs/edit/<?= $krs['idKrs'] ?>" class="btn-edit">✏️ Edit</a>
                                         <button class="btn-delete" onclick="alert('Hapus: <?= htmlspecialchars($krs['mataKuliah']) ?>')">🗑️ Delete</button>
                                     </div>
                                 </td>
