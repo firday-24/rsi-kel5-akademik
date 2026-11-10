@@ -40,6 +40,8 @@ try {
     elseif ($method === 'GET' && $path === '/admin/krs') (new KRS())->tampilkan();
     elseif ($method === 'GET' && $path === '/admin/krs/tambah') (new KRS())->formTambah();
     elseif ($method === 'POST' && $path === '/admin/krs/simpan') (new KRS())->tambahKrs();
+    elseif ($method === 'GET' && preg_match('#^/admin/krs/edit/(\d+)$#', $path, $m)) (new KRS())->formEdit((int)$m[1]);
+    elseif ($method === 'POST' && preg_match('#^/admin/krs/update/(\d+)$#', $path, $m)) (new KRS())->editKrs((int)$m[1]);
     elseif ($method === 'GET' && $path === '/dosen/izin') (new verifikasi_izin())->getDaftarPengajuanPending();
     elseif ($method === 'POST' && preg_match('#^/dosen/izin/([^/]+)/setujui$#', $path, $m)) (new verifikasi_izin())->prosesSetujui(rawurldecode($m[1]));
     elseif ($method === 'POST' && preg_match('#^/dosen/izin/([^/]+)/tolak$#', $path, $m)) (new verifikasi_izin())->prosesTolak(rawurldecode($m[1]));
