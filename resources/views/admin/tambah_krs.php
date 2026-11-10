@@ -312,7 +312,13 @@
 
         <div class="content-grid">
             <form action="/demo/public/admin/krs/simpan" method="POST" class="form-card">
-                <input type="hidden" name="_csrf" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                <?php if (function_exists('csrf_field')): ?>
+                    <?= csrf_field() ?>
+                <?php else: ?>
+                    <input type="hidden" name="_csrf" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                    <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['_csrf'] ?? '') ?>">
+                <?php endif; ?>
 
                 <div class="form-card-header">Informasi Jadwal</div>
 

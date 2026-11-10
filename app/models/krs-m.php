@@ -16,7 +16,8 @@ class KRS_modal
 
     private function initDummy(): void
     {
-        if (!isset($_SESSION['krs_jadwal'])) {
+        // Jika session belum ada ATAU masih memakai format lama (belum ada key 'mataKuliah')
+        if (!isset($_SESSION['krs_jadwal']) || !isset($_SESSION['krs_jadwal'][0]['mataKuliah'])) {
             $_SESSION['krs_jadwal'] = [
                 [
                     'idKrs' => 1,
@@ -117,5 +118,34 @@ class KRS_modal
             'ruang' => $dataKrs['ruang'],
             'kuota' => (int)$dataKrs['kuota']
         ];
+    }
+
+    public function getKrsById(int $idKrs): ?array
+    {
+        $this->initDummy();
+        foreach ($_SESSION['krs_jadwal'] as $krs) {
+            if ((int)$krs['idKrs'] === $idKrs) {
+                return $krs;
+            }
+        }
+        return null;
+    }
+
+    public function updateDataKrs(int $idKrs, array $dataKrs): void
+    {
+        $this->initDummy();
+        foreach ($_SESSION['krs_jadwal'] as &$krs) {
+            if ((int)$krs['idKrs'] === $idKrs) {
+                $krs['mataKuliah']   = $dataKrs['mataKuliah'];
+                $krs['programStudi'] = $dataKrs['programStudi'];
+                $krs['kelas']        = $dataKrs['kelas'];
+                $krs['dosen']        = $dataKrs['dosen'];
+                $krs['hari']         = $dataKrs['hari'];
+                $krs['jam']          = $dataKrs['jam'];
+                $krs['ruang']        = $dataKrs['ruang'];
+                $krs['kuota']        = (int)$dataKrs['kuota'];
+                break;
+            }
+        }
     }
 }
