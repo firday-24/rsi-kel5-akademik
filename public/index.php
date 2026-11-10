@@ -26,6 +26,7 @@ try{
  elseif($method==='GET'&&$path==='/mahasiswa/izin/buat')(new izin())->getFormPengajuan();
  elseif($method==='POST'&&$path==='/mahasiswa/izin/simpan')(new izin())->simpanPengajuan();
  elseif($method==='GET'&&$path==='/dosen')(new BerandaDosen())->tampil();
+ elseif($method==='GET'&&$path==='/admin')(new BerandaAdmin())->tampil();
  elseif($method==='GET'&&$path==='/dosen/izin')(new verifikasi_izin())->getDaftarPengajuanPending();
  elseif($method==='POST'&&preg_match('#^/dosen/izin/([^/]+)/setujui$#',$path,$m))(new verifikasi_izin())->prosesSetujui(rawurldecode($m[1]));
  elseif($method==='POST'&&preg_match('#^/dosen/izin/([^/]+)/tolak$#',$path,$m))(new verifikasi_izin())->prosesTolak(rawurldecode($m[1]));
