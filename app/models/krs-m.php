@@ -148,4 +148,13 @@ class KRS_modal
             }
         }
     }
+
+    public function hapusDataKrs(int $idKrs): void
+    {
+        $this->initDummy();
+        $_SESSION['krs_jadwal'] = array_values(array_filter(
+            $_SESSION['krs_jadwal'],
+            fn($krs) => (int)$krs['idKrs'] !== $idKrs
+        ));
+    }
 }
