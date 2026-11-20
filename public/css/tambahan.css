@@ -19,3 +19,31 @@
 
 /* Jarak antar kartu di halaman presensi (rekap + riwayat pertemuan) */
 .attendance-card + .attendance-card { margin-top: 20px; }
+
+/* Halaman Scan Presensi Mahasiswa (RE - IMUI13) & Kelola Presensi Dosen */
+.attendance-scan-page { max-width: 640px; margin: 28px auto 60px; }
+.scanner-card { background: #fff; border: 1px solid var(--line, #e0e7f1); border-radius: 16px; padding: 24px; }
+.camera-viewport-mock { position: relative; height: 220px; border-radius: 12px; background: #14233b; color: #dbeafe; display: grid; place-items: center; overflow: hidden; margin-bottom: 18px; border: 2px dashed #3b6fd8; }
+.camera-viewport-mock span { z-index: 1; font-size: 13px; background: rgba(20, 35, 59, .75); padding: 6px 12px; border-radius: 999px; }
+.scanner-laser-line { position: absolute; left: 16px; right: 16px; height: 2px; background: #38bdf8; box-shadow: 0 0 12px #38bdf8; animation: scanLaser 2.2s ease-in-out infinite; }
+@keyframes scanLaser { 0%, 100% { top: 20%; } 50% { top: 80%; } }
+.scan-form-stack { display: flex; flex-direction: column; gap: 14px; }
+.scan-demo-controls { display: flex; flex-direction: column; gap: 10px; background: #f8fafd; border: 1px solid var(--line, #e0e7f1); border-radius: 10px; padding: 14px; }
+.scan-demo-controls select, .scan-demo-controls input { width: 100%; padding: 9px 12px; border: 1px solid var(--line, #e0e7f1); border-radius: 8px; font-size: 13px; background: #fff; }
+.gps-status-note { color: var(--muted, #7184a3); font-size: 12px; }
+.full-width { width: 100%; justify-content: center; }
+
+.scan-result-badge { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 14px; font-size: 24px; font-weight: 700; }
+.scan-result-badge.success { background: #eaf7f1; color: #13865e; }
+.scan-result-badge.error { background: #fff0f0; color: #e13c3c; }
+.scan-result-actions { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+
+.dosen-session-form { padding: 20px; }
+.dosen-session-form .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.dosen-session-form .form-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: flex-end; }
+.inline-status-form { display: inline-flex; align-items: center; gap: 8px; }
+.inline-status-form select { padding: 6px 10px; border: 1px solid var(--line, #e0e7f1); border-radius: 8px; font-size: 12px; background: #fff; }
+.token-badge { background: #edf3ff; color: #1d4289; font-size: 12px; padding: 6px 12px; border-radius: 8px; }
+.token-badge code { font-family: monospace; font-weight: 700; }
+.lecturer-flash.success { background: #eaf7f1; color: #13865e; border: 1px solid #bce8d5; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-size: 13px; }
+
