@@ -32,10 +32,16 @@ try {
     elseif ($method === 'GET' && $path === '/mahasiswa') (new BerandaMahasiswa())->tampil();
     elseif ($method === 'GET' && $path === '/mahasiswa/khs') (new KHS())->lihatKhs((int)($_GET['semester'] ?? 3));
     elseif ($method === 'GET' && $path === '/mahasiswa/presensi') (new presensi())->getLogPresensi();
+    elseif ($method === 'GET' && $path === '/mahasiswa/presensi/scan') (new presensi_mahasiswa_controller())->tampil();
+    elseif ($method === 'POST' && $path === '/mahasiswa/presensi/scan') (new presensi_mahasiswa_controller())->kirimDataQR();
     elseif ($method === 'GET' && $path === '/mahasiswa/izin') (new izin())->getRiwayatPengajuan();
     elseif ($method === 'GET' && $path === '/mahasiswa/izin/buat') (new izin())->getFormPengajuan();
     elseif ($method === 'POST' && $path === '/mahasiswa/izin/simpan') (new izin())->simpanPengajuan();
     elseif ($method === 'GET' && $path === '/dosen') (new BerandaDosen())->tampil();
+    elseif ($method === 'GET' && $path === '/dosen/presensi') (new presensi_dosen_controller())->getKelolaPresensi();
+    elseif ($method === 'POST' && $path === '/dosen/presensi/aktifkan') (new presensi_dosen_controller())->aktifkanSesi();
+    elseif ($method === 'POST' && $path === '/dosen/presensi/simpan') (new presensi_dosen_controller())->simpanPerubahanPresensi();
+    elseif ($method === 'GET' && preg_match('#^/dosen/presensi/edit/([^/]+)$#', $path, $m)) (new presensi_dosen_controller())->formEdit(rawurldecode($m[1]));
     elseif ($method === 'GET' && $path === '/admin') (new BerandaAdmin())->tampil();
     elseif ($method === 'GET' && $path === '/admin/krs') (new KRS())->tampilkan();
     elseif ($method === 'GET' && $path === '/admin/krs/tambah') (new KRS())->formTambah();
