@@ -4,10 +4,15 @@ include ROOT . '/resources/views/layouts/header.php';
 // Variabel dari controller presensi: $rekap, $log, $kosong
 ?>
 <section class="attendance-page">
-    <a href="<?= e(url('mahasiswa')) ?>" class="back-link"><span>←</span> Kembali ke home</a>
-    <div class="page-heading">
-        <h1>Rekap Kehadiran</h1>
-        <p>Pantau kehadiranmu di setiap mata kuliah selama satu semester.<?php if (!$kosong): ?> Jaga kehadiranmu untuk memenuhi syarat UAS (&gt;=80%)<?php endif; ?></p>
+    <div class="permit-heading-row">
+        <div>
+            <a href="<?= e(url('mahasiswa')) ?>" class="back-link"><span>←</span> Kembali ke home</a>
+            <div class="page-heading">
+                <h1>Rekap Kehadiran</h1>
+                <p>Pantau kehadiranmu di setiap mata kuliah selama satu semester.<?php if (!$kosong): ?> Jaga kehadiranmu untuk memenuhi syarat UAS (&gt;=80%)<?php endif; ?></p>
+            </div>
+        </div>
+        <a href="<?= e(url('mahasiswa/presensi/scan')) ?>" class="primary-button create-top"><span>▦</span> Scan QR Presensi</a>
     </div>
 
     <section class="attendance-card">

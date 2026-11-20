@@ -36,7 +36,7 @@ $menunggu = isset($jumlahMenunggu) ? (string)$jumlahMenunggu : '0';
     <section class="quick-section lecturer-quick">
         <h2>Akses cepat</h2>
         <div class="quick-grid">
-            <a class="quick-card" href="#">
+            <a class="quick-card" href="<?= e(url('dosen/presensi')) ?>">
                 <span class="quick-icon"><svg viewBox="0 0 48 48"><path d="M12 8H9a4 4 0 0 0-4 4v5M36 8h3a4 4 0 0 1 4 4v5M5 31v5a4 4 0 0 0 4 4h3M43 31v5a4 4 0 0 1-4 4h-3M15 24h18"/></svg></span>
                 <span class="quick-copy"><strong>Presensi</strong><small>Buka &amp; catat presensi kelas</small></span><span class="quick-arrow">↗</span>
             </a>
