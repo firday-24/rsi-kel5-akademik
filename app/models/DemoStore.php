@@ -32,10 +32,37 @@ final class DemoStore {
             foreach($meetings as &$m) if($m['id']===$r['meeting_id']) $m['status']=$r['type'];
             unset($m);
         }
-        return ['courses'=>$courses,'meetings'=>$meetings,'requests'=>$requests];
+        $today = date('Y-m-d');
+        $sessions = [
+            [
+                'ID_SESI' => 'SES001',
+                'ID_JADWAL' => 'SI101',
+                'ID_PRESENSI' => 'PRS004',
+                'PERTEMUAN_KE' => 4,
+                'TANGGAL' => '2026-09-28',
+                'BATAS_WAKTU' => $today . ' 23:59:00',
+                'STATUS_AKTIF' => 1,
+                'TOKEN_QR' => 'TOKEN_DARING_SI101',
+                'JENIS_PERKULIAHAN' => 'DARING',
+            ],
+            [
+                'ID_SESI' => 'SES002',
+                'ID_JADWAL' => 'SI102',
+                'ID_PRESENSI' => 'PRS015',
+                'PERTEMUAN_KE' => 5,
+                'TANGGAL' => '2026-10-05',
+                'BATAS_WAKTU' => $today . ' 23:59:00',
+                'STATUS_AKTIF' => 1,
+                'TOKEN_QR' => 'TOKEN_LURING_SI102',
+                'JENIS_PERKULIAHAN' => 'LURING',
+            ],
+        ];
+        return ['courses'=>$courses,'meetings'=>$meetings,'requests'=>$requests,'sessions'=>$sessions,'fraud_logs'=>[]];
     }
     public static function &data(): array {
         if (!isset($_SESSION['demo_data'])) $_SESSION['demo_data']=self::seed();
+        if (!isset($_SESSION['demo_data']['sessions'])) $_SESSION['demo_data']['sessions']=self::seed()['sessions'];
+        if (!isset($_SESSION['demo_data']['fraud_logs'])) $_SESSION['demo_data']['fraud_logs']=[];
         return $_SESSION['demo_data'];
     }
     public static function reset(): void { $_SESSION['demo_data']=self::seed(); }
