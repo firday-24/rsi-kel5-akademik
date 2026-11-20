@@ -26,13 +26,17 @@ class Login {
         );
 
         if (!$u) {
-            flash('error', 'Akun atau kata sandi tidak sesuai. Gunakan akun demo yang tersedia.');
-            redirect('');
+            $this->TampilkanEmailSalahAtauSandiSalah();
         }
 
         session_regenerate_id(true);
         $_SESSION['user'] = $u;
         redirect($this->tujuanRole($u['role']));
+    }
+
+    public function TampilkanEmailSalahAtauSandiSalah(): void {
+        flash('error', 'Email atau kata sandi salah, atau akun tidak aktif.');
+        redirect('');
     }
 
     public function Logout(): void {
